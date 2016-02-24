@@ -16,9 +16,9 @@ Sum = 0;
 tags = soup('span')
 for tag in tags:
     # Look at the parts of a tag
-    #print 'TAG:',tag
-    #print 'URL:',tag.get('href', None)
-    #print 'Contents:',tag.contents[0]
+    # print 'TAG:',tag
+    # print 'URL:',tag.get('href', None)
+    # print 'Contents:',tag.contents[0]
     count+=1
     Sum+=int(tag.contents[0])
 print 'Count ', count
