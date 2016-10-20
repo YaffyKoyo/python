@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Database dump</title>
+    </head>
+
+    <body>
+        {% for question in questions %}
+            <p>{{ question }}</p>
+        {% endfor %}
+
+        <hr/>
+
+        <p>Query took: {{ time_taken }} seconds</p>
+    </body>
+</html>
