@@ -35,6 +35,13 @@ ALLOWED_HOSTS = []
    # }
 #}
 
+CACHES = {
+    'default': {
+        'BACKEND': 'test',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 # Application definition
 
 INSTALLED_APPS = [
