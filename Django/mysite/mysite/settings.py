@@ -27,17 +27,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-#CACHES = {
- #   'default': {
-  #      'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-   #     'LOCATION': '127.0.0.1:11211',
-   # }
-#}
-
+'''
 CACHES = {
     'default': {
-        'BACKEND': 'test',
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+'''
+CACHES = {
+    'default': {
+        'BACKEND': 'mysite.test.MMClone',
         'LOCATION': '127.0.0.1:11211',
     }
 }

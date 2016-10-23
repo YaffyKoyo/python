@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response, redirect
 from queue.models import QueueItem
 from django.core.context_processors import csrf
 from django.template import loader
-from django.core.cache import cache
+from mysite import test
 
 def index(request):
     t = loader.get_template("index.html")
@@ -26,11 +26,12 @@ def remove(request):
     return redirect("/")
 
 def memcached_test(request):
+    temp = test.MCClone('None',None)
     cache_key = "string"
-    result = cache.get(cache_key)
+    result = temp.get(cache_key)
     if result is None:
         data = "hello, found"
-        cache.set(cache_key, data, 60)
+        temp.set(cache_key, data, 5)
         return HttpResponse(result)
     else:
         return HttpResponse(result)
