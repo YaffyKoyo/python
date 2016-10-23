@@ -6,9 +6,18 @@ from django.core.context_processors import csrf
 from django.template import loader
 from mysite import test
 
+QUEUE_KEY = "queue"
+simpleCache = test.MCClone('None',None)
+
 def index(request):
     t = loader.get_template("index.html")
-    queue = QueueItem.objects.order_by("id")
+    #this part use cache to render the index page.
+    '''queue = simpleCache.get(QUEUE_KEY)
+    if not queue:    
+        queue = db_fetch()
+        simpleCache.set(QUEUE_KEY,queue)'''
+    #this one fetches the db directly.
+    queue = db_fetch()
     c = {'queue':queue}
     c.update(csrf(request))
     html = t.render(c)
@@ -35,3 +44,6 @@ def memcached_test(request):
         return HttpResponse(result)
     else:
         return HttpResponse(result)
+
+def db_fetch():
+    return QueueItem.objects.order_by("id")

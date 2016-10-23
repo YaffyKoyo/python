@@ -21,6 +21,10 @@ class MCClone():
                 return None
     
     def _get_time(self,key):
+        '''
+        this one is just for debug
+        will not be used for real project
+        '''
         try:
             return self._time_stamp[key]
         except ValueError:
