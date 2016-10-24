@@ -1,4 +1,21 @@
 
+"""
+Simeple memcache colone.
+    this clone implmented basic set and get functions. 
+
+Date: 24.10.2016
+
+Gotta to do:
+    **key could be generate with hash or somthing to limit the length
+    **only dictionary may causing some inconviniance
+    **need to figure out the proxy object stuff, to only import MCClone
+        reference could be found in the __init__.py in django.core.cache
+    **the faulty handling is not good enough
+    **should limited the total amount of caches.
+    ***more issues could refer the django cache source code.
+"""
+
+
 import time
 
 _values = {}
@@ -49,7 +66,7 @@ class MCClone():
 
     def __contains__(self, key):
         """
-        contains make sure it will expired automatically.
+        __contains__ makes keys expire automatically. Not sure the mechanism.
         need to investigate more on this part.
         """
         return self.key_active(key)

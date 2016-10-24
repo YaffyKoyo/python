@@ -79,10 +79,18 @@
         <h1>Queue</h1>
       </div>
 
-      <p class="lead">MemCachier Django Caching tutorial. This demonstrates the
-        use of Memcached to create a simple queue. Items are added to the back
-        and removed from the front of the queue, ala first-in-first-out
-        (FIFO).</p>
+      <p class="lead">Simple memcached project. This demonstrates the use of Memcached to create a simple queue. 
+        Items are added to the back and removed from the front of the queue. </p>
+
+      <p class="lead">The memcached code is in the test.py file under mysite. Commenting on certain statment
+         in 'index' function will turn on and off the cache functionality. If cache used, when hitting the remove,
+         the item list will updated with a delay since cached data was fetched and will expire after 10 seconds.
+         Please refresh the page to check the items list updating after hitting the remove, if cache is used.</p>
+
+      <p class="lead"> This django app is developed based on the 
+        <a href="https://devcenter.heroku.com/articles/django-memcache">turtorial</a> of Heroku Dev Center</p>  
+      
+
 
       {% csrf_token %}
       <input type="text" id="item" placeholder="Type something ..." />

@@ -11,13 +11,21 @@ simpleCache = test.MCClone('None',None)
 
 def index(request):
     t = loader.get_template("index.html")
-    #this part use cache to render the index page.
-    '''queue = simpleCache.get(QUEUE_KEY)
+
+    # this part use cache to render the index page.
+    # version with cache
+    queue = simpleCache.get(QUEUE_KEY)
     if not queue:    
         queue = db_fetch()
-        simpleCache.set(QUEUE_KEY,queue)'''
-    #this one fetches the db directly.
-    queue = db_fetch()
+        simpleCache.set(QUEUE_KEY,queue)
+    # ````^````comment this part if you want to fetch the data
+    # directly from db using next statement
+    
+    # this part fetches the db directly.
+    ''' queue = db_fetch()'''
+    # ````^````comment this part if you want to fetch the data
+    # from caches
+    
     c = {'queue':queue}
     c.update(csrf(request))
     html = t.render(c)
@@ -26,12 +34,19 @@ def index(request):
 def add(request):
     item = QueueItem(text=request.POST["text"])
     item.save()
+    # the cache should be updated as well.
+    # commented here for the sake of demostration
+    simpleCache.set(QUEUE_KEY,db_fetch())
+
     return HttpResponse("<li>%s</li>" % item.text)
 
 def remove(request):
     items = QueueItem.objects.order_by("id")[:1]
     if len(items)!=0:
         items[0].delete()
+        # technically, the cache should be updated as well
+        # commented here for the sake of demostration
+        '''simpleCache.set(QUEUE_KEY,db_fetch())'''
     return redirect("/")
 
 def memcached_test(request):
